@@ -1,0 +1,675 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG",
+    "name": "SecureX Cloud Analytics Demo Workflow Shared",
+    "title": "SecureX Cloud Analytics Demo Workflow Shared",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "start_time",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01IX6AXF592ZU358kGSlXo9kaRINcuIByGu",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "tabletype_01I890150VZGS7d1sNh4ORUaME0HkN4o0Py",
+        "properties": {
+          "scope": "output",
+          "name": "port_scan_observable_list",
+          "type": "datatype.table",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01IX6AXF5945J0UsSdZ6uRF88btDWvMES8S",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "portscan_alert_url",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01IX6AXF58XS931ZXmCDfKnJwCRtHrcjILv",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "general_alert_url",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01IX6AXF590HP3kuaEYNpb953U4iDum5vxv",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "end_time",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01IX6AXF591SX35I3EK9A7C45mHSWmjNdYA",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "description": "The workflow will query Stealthwatch Cloud for all open alerts within the last 24 hours. We will then parse out the \"Inbound Port Scanner\" alert and create a custom alert message to send to Webex Teams. We also create a generic message to send for all other alerts.",
+      "display_name": "SecureX Cloud Analytics Demo Workflow Shared",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01IX6AY84QJGT7GdFx5110InBBHB2LuKCm1",
+        "name": "Group",
+        "title": "Calculate Date and Time",
+        "type": "logic.group",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Calculate Date and Time",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01IX6AYPS57RK35aEm7OboLVT6dYhR4f6Bk",
+            "name": "Calculate Date",
+            "title": "Get the Time Right Now",
+            "type": "core.calculate_date",
+            "base_type": "activity",
+            "properties": {
+              "adjustment": 0,
+              "continue_on_failure": false,
+              "description": "Create a time stamp of when this workflow is executed. We will use this time stamp as a parameter when requesting all open alerts.",
+              "display_name": "Get the Time Right Now",
+              "original_date": "$workflow.definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG.output.start_time$",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01IX6AZ2S37CX0zPwNH5MhzsEMAIHZ9a9TN",
+            "name": "Set Variables",
+            "title": "Set Variable End_Time",
+            "type": "core.set_multiple_variables",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "description": "Setting the time stamp of the execution of this workflow to the end_time variable",
+              "display_name": "Set Variable End_Time",
+              "skip_execution": false,
+              "variables_to_update": [
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG.output.variable_workflow_01IX6AXF591SX35I3EK9A7C45mHSWmjNdYA$",
+                  "variable_value_new": "$activity.definition_activity_01IX6AYPS57RK35aEm7OboLVT6dYhR4f6Bk.output.start_time$"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01IX6AZBMWJRG2SKTC3tdDbzYKDynkltbTG",
+            "name": "Calculate Date",
+            "title": "Get Time 24 Hours Ago",
+            "type": "core.calculate_date",
+            "base_type": "activity",
+            "properties": {
+              "adjustment": -86400,
+              "continue_on_failure": false,
+              "description": "Create a time stamp of when this workflow is executed minus 24 hours. We will use this time stamp as a parameter when requesting all open alerts",
+              "display_name": "Get Time 24 Hours Ago",
+              "original_date": "$activity.definition_activity_01IX6AYPS57RK35aEm7OboLVT6dYhR4f6Bk.output.start_time$",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01IX6AZOYL5932hfT4ppBpknorQGzZsgRsk",
+            "name": "Set Variables",
+            "title": "Set Variable Start_Time",
+            "type": "core.set_multiple_variables",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "description": "Setting the time stamp of the execution of this workflow to the start_time variable",
+              "display_name": "Set Variable Start_Time",
+              "skip_execution": false,
+              "variables_to_update": [
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG.output.variable_workflow_01IX6AXF592ZU358kGSlXo9kaRINcuIByGu$",
+                  "variable_value_new": "$activity.definition_activity_01IX6AZBMWJRG2SKTC3tdDbzYKDynkltbTG.output.result$"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01IX6B01UICCG10UE1WCzoquBPk2jSM7KDX",
+        "name": "HTTP Request",
+        "title": "Request All Open Alerts",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "content_type": "application/json",
+          "continue_on_error_status_code": false,
+          "continue_on_failure": false,
+          "custom_headers": [
+            {
+              "name": "Authorization",
+              "value": ""
+            }
+          ],
+          "description": "Get request for all SecureX Cloud Analytics Open Alerts in the last 24 hours",
+          "display_name": "Request All Open Alerts",
+          "method": "GET",
+          "relative_url": "/alerts/alert?status=open&time__gte=$workflow.definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG.output.variable_workflow_01IX6AXF592ZU358kGSlXo9kaRINcuIByGu$&time__lt=$workflow.definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG.output.variable_workflow_01IX6AXF591SX35I3EK9A7C45mHSWmjNdYA$",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01I5VXXRSRI1Q3Lyj4M0TUDJUUVWGlwvc75"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01IX6B0JP9BP5775g8IyGMqANmzNAUPapne",
+        "name": "Read Table from JSON",
+        "title": "Create Alerts Table",
+        "type": "corejava.read_table_from_json",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "description": "Adding all open alerts to a table so we can query alert observables in next step ",
+          "display_name": "Create Alerts Table",
+          "input_json": "$activity.definition_activity_01IX6B01UICCG10UE1WCzoquBPk2jSM7KDX.output.response_body$",
+          "jsonpath_query": "$.[\"objects\"]",
+          "persist_output": true,
+          "populate_columns": false,
+          "skip_execution": false,
+          "table_columns": [
+            {
+              "column_name": "id",
+              "column_type": "string"
+            },
+            {
+              "column_name": "text",
+              "column_type": "string"
+            },
+            {
+              "column_name": "type",
+              "column_type": "string"
+            },
+            {
+              "column_name": "time",
+              "column_type": "string"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01IX6B0U952C63Gclr0zYrjksFTuWeUTWjE",
+        "name": "For Each",
+        "title": "For Each Alert in Table",
+        "type": "logic.for_each",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "description": "Loop through all the Alerts in the table. ",
+          "display_name": "For Each Alert in Table",
+          "skip_execution": false,
+          "source_array": "$activity.definition_activity_01IX6B0JP9BP5775g8IyGMqANmzNAUPapne.output.read_table_from_json$"
+        },
+        "object_type": "definition_activity",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01IX6B14Z4TLH5KbAb1RaLrzeYV5xhpRdty",
+            "name": "Condition Block",
+            "title": "IF",
+            "type": "logic.if_else",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "description": "Condition if alert type is \"Inbound Port Scanner\" do this, if any other alert type, do that.",
+              "display_name": "IF",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "blocks": [
+              {
+                "unique_name": "definition_activity_01IX6B1DETBCA5Y9M8V6rY4eohRZsFTR7h8",
+                "name": "Condition Branch",
+                "title": "Alert Type Equals Inbound Port Scanner",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$activity.definition_activity_01IX6B0U952C63Gclr0zYrjksFTuWeUTWjE.input.source_array[@].type$",
+                    "operator": "eq",
+                    "right_operand": "Inbound Port Scanner"
+                  },
+                  "continue_on_failure": false,
+                  "description": "If alert type is \"Inbound Port Scanner\"",
+                  "display_name": "Alert Type Equals Inbound Port Scanner",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01IX6B1IDC0FV4EMvt6WVKPs2P6oaNbP1u2",
+                    "name": "HTTP Request",
+                    "title": "Request Observations",
+                    "type": "web-service.http_request",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "allow_auto_redirect": true,
+                      "content_type": "application/json",
+                      "continue_on_error_status_code": false,
+                      "continue_on_failure": false,
+                      "custom_headers": [
+                        {
+                          "name": "Authorization",
+                          "value": ""
+                        }
+                      ],
+                      "description": "Requesting Observations for Inbound Port Scanner Alert",
+                      "display_name": "Request Observations",
+                      "method": "GET",
+                      "relative_url": "/observations/all/?alert=$activity.definition_activity_01IX6B0U952C63Gclr0zYrjksFTuWeUTWjE.input.source_array[@].id$&time__gte=$workflow.definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG.output.variable_workflow_01IX6AXF592ZU358kGSlXo9kaRINcuIByGu$&time__lt=$workflow.definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG.output.variable_workflow_01IX6AXF591SX35I3EK9A7C45mHSWmjNdYA$",
+                      "runtime_user": {
+                        "override_target_runtime_user": false,
+                        "target_default": true
+                      },
+                      "skip_execution": false,
+                      "target": {
+                        "override_workflow_target": true,
+                        "target_id": "definition_target_01I5VXXRSRI1Q3Lyj4M0TUDJUUVWGlwvc75"
+                      }
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01IX6B1SAUUTK0R3Yx1P5FNdRVsvrR6lU3K",
+                    "name": "Read Table from JSON",
+                    "title": "Create Observations Table",
+                    "type": "corejava.read_table_from_json",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "description": "Creating array to store observation types to loop through",
+                      "display_name": "Create Observations Table",
+                      "input_json": "$activity.definition_activity_01IX6B1IDC0FV4EMvt6WVKPs2P6oaNbP1u2.output.response_body$",
+                      "jsonpath_query": "$.[\"objects\"]",
+                      "persist_output": true,
+                      "populate_columns": false,
+                      "skip_execution": false,
+                      "table_columns": [
+                        {
+                          "column_name": "observation_name",
+                          "column_type": "string"
+                        },
+                        {
+                          "column_name": "scanner_ip",
+                          "column_type": "string"
+                        },
+                        {
+                          "column_name": "scanned_ip",
+                          "column_type": "string"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01IX6B23D6E7P1QEQ7S15RIl7h0j81MnepR",
+                    "name": "Split String",
+                    "title": "Split the Alert Text String",
+                    "type": "core.splitstring",
+                    "base_type": "activity",
+                    "properties": {
+                      "boundaries": [
+                        {
+                          "boundary": "\\n"
+                        }
+                      ],
+                      "continue_on_failure": false,
+                      "description": "Need to split the alert text string to parse out the alert URL. for example, \"text\": \"User Watchlist Hit on 192.168.100.159\\nhttps://cisco-demo.obsrvbl.com/#/alerts/3974\", we split the \"text\" value at \\n and so we now have 2 stings, User Watchlist Hit on 192.168.100.159\" and \"https://cisco-demo.obsrvbl.com/#/alerts/3974\". We can now use the second part of the sting for the alert message.",
+                      "display_name": "Split the Alert Text String",
+                      "input_string": "$activity.definition_activity_01IX6B0U952C63Gclr0zYrjksFTuWeUTWjE.input.source_array[@].text$",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01IX6B2CVD8Y33zZrGBnKB82fudRnhiWEnD",
+                    "name": "Set Variables",
+                    "title": "Set portscan_alert_url Variable",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "description": "This sets the portscan_alert_url variable to the second part of the split string.",
+                      "display_name": "Set portscan_alert_url Variable",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG.output.variable_workflow_01IX6AXF58XS931ZXmCDfKnJwCRtHrcjILv$",
+                          "variable_value_new": "$activity.definition_activity_01IX6B23D6E7P1QEQ7S15RIl7h0j81MnepR.output.parts[-1]$"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01IX6B2LYF7SX7lhlJ5feEypQwrMPTMDicQ",
+                    "name": "For Each",
+                    "title": "For Each Observable in Table",
+                    "type": "logic.for_each",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "description": "Loop through the Observation Table",
+                      "display_name": "For Each Observable in Table",
+                      "skip_execution": false,
+                      "source_array": "$activity.definition_activity_01IX6B1SAUUTK0R3Yx1P5FNdRVsvrR6lU3K.output.read_table_from_json$"
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01IX6B2WPRIZ728pXoyqpUaiB41FsPlotoQ",
+                        "name": "Update Row in Table",
+                        "title": "Update the Port Scan Observable Table Variable",
+                        "type": "core.updaterowintable",
+                        "base_type": "activity",
+                        "properties": {
+                          "action_timeout": 180,
+                          "columns": [
+                            {
+                              "column_name": "observ_name",
+                              "column_type": "string"
+                            },
+                            {
+                              "column_name": "scanner_ip",
+                              "column_type": "string"
+                            },
+                            {
+                              "column_name": "scanned_ip",
+                              "column_type": "string"
+                            }
+                          ],
+                          "continue_on_failure": false,
+                          "description": "List used as a holder for all port scan observables.",
+                          "display_name": "Update the Port Scan Observable Table Variable",
+                          "input_table": "$workflow.definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG.output.variable_workflow_01IX6AXF5945J0UsSdZ6uRF88btDWvMES8S$",
+                          "row": [
+                            {
+                              "key": "observ_name",
+                              "type": "string",
+                              "value": "$activity.definition_activity_01IX6B2LYF7SX7lhlJ5feEypQwrMPTMDicQ.input.source_array[@].observation_name$"
+                            },
+                            {
+                              "key": "scanner_ip",
+                              "type": "string",
+                              "value": "$activity.definition_activity_01IX6B2LYF7SX7lhlJ5feEypQwrMPTMDicQ.input.source_array[@].scanner_ip$"
+                            },
+                            {
+                              "key": "scanned_ip",
+                              "type": "string",
+                              "value": "$activity.definition_activity_01IX6B2LYF7SX7lhlJ5feEypQwrMPTMDicQ.input.source_array[@].scanned_ip$"
+                            }
+                          ],
+                          "rows": {
+                            "all_rows": true,
+                            "rows_matching_criteria": false
+                          },
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity"
+                      },
+                      {
+                        "unique_name": "definition_activity_01IX6B371TQVF5f3QFAO329x0BcK0cuBrSG",
+                        "name": "HTTP Request",
+                        "title": "Post Alert Message to WebEx Teams",
+                        "type": "web-service.http_request",
+                        "base_type": "activity",
+                        "properties": {
+                          "action_timeout": 180,
+                          "allow_auto_redirect": true,
+                          "body": "{\n  \"roomId\": \"Add Room ID here\",\n  \"text\": \"SecureX Cloud Analytics has detected an $activity.definition_activity_01IX6B2LYF7SX7lhlJ5feEypQwrMPTMDicQ.input.source_array[@].observation_name$ alarm on your network where internal host(s) $activity.definition_activity_01IX6B2LYF7SX7lhlJ5feEypQwrMPTMDicQ.input.source_array[@].scanned_ip$ was scanned by external host(s) $activity.definition_activity_01IX6B2LYF7SX7lhlJ5feEypQwrMPTMDicQ.input.source_array[@].scanner_ip$ at $activity.definition_activity_01IX6B0U952C63Gclr0zYrjksFTuWeUTWjE.input.source_array[@].time$. Alert ID $activity.definition_activity_01IX6B0U952C63Gclr0zYrjksFTuWeUTWjE.input.source_array[@].id$ - $activity.definition_activity_01IX6B0U952C63Gclr0zYrjksFTuWeUTWjE.input.source_array[@].type$ has been generated. For additional information please go to $workflow.definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG.output.variable_workflow_01IX6AXF58XS931ZXmCDfKnJwCRtHrcjILv$\"\n}",
+                          "content_type": "application/json",
+                          "continue_on_error_status_code": false,
+                          "continue_on_failure": false,
+                          "custom_headers": [
+                            {
+                              "name": "Authorization",
+                              "value": ""
+                            }
+                          ],
+                          "description": "Send alert message to Webex Teams.\n\"SecureX Cloud Analytics has detected alert {alert type} on your network. Alert ID {alert id} has been generated. For additional information please go to {alert url}”.",
+                          "display_name": "Post Alert Message to WebEx Teams",
+                          "method": "POST",
+                          "relative_url": "/v1/messages",
+                          "runtime_user": {
+                            "override_target_runtime_user": false,
+                            "target_default": true
+                          },
+                          "skip_execution": false,
+                          "target": {
+                            "override_workflow_target": true,
+                            "target_id": "definition_target_01GRC3KACN0EQ3FKm380fx9ufbyfPdrEJR5"
+                          }
+                        },
+                        "object_type": "definition_activity"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01IX6B3I9TAIG5dCikp2jOJHOSSKAHc0mh5",
+                "name": "Condition Branch",
+                "title": "Alert Type Equals Anything Else",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$activity.definition_activity_01IX6B0U952C63Gclr0zYrjksFTuWeUTWjE.input.source_array[@].type$",
+                    "operator": "ne",
+                    "right_operand": "Inbound Port Scanner"
+                  },
+                  "continue_on_failure": false,
+                  "description": "If alert type is anythng but \"Inbound Port Scanner\"",
+                  "display_name": "Alert Type Equals Anything Else",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01IX6B3MZPD0P6QT2DVz76KWBbUQTKVoj7F",
+                    "name": "Split String",
+                    "title": "Split the Alert Text String",
+                    "type": "core.splitstring",
+                    "base_type": "activity",
+                    "properties": {
+                      "boundaries": [
+                        {
+                          "boundary": "\\n"
+                        }
+                      ],
+                      "continue_on_failure": false,
+                      "description": "Need to split the alert text string to parse out the alert URL. for example, \"text\": \"User Watchlist Hit on 192.168.100.159\\nhttps://cisco-demo.obsrvbl.com/#/alerts/3974\", we split the \"text\" value at \\n and so we now have 2 stings, User Watchlist Hit on 192.168.100.159\" and \"https://cisco-demo.obsrvbl.com/#/alerts/3974\". We can now use the second part of the sting for the alert message.",
+                      "display_name": "Split the Alert Text String",
+                      "input_string": "$activity.definition_activity_01IX6B0U952C63Gclr0zYrjksFTuWeUTWjE.input.source_array[@].text$",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01IX6B40URSDL6rfAJ8dEXsOGivUE4yo817",
+                    "name": "Set Variables",
+                    "title": "Set General Alert URL",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "description": "Setting the general_alert_url to the second part of the split alert text sting",
+                      "display_name": "Set General Alert URL",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG.output.variable_workflow_01IX6AXF590HP3kuaEYNpb953U4iDum5vxv$",
+                          "variable_value_new": "$activity.definition_activity_01IX6B3MZPD0P6QT2DVz76KWBbUQTKVoj7F.output.parts[-1]$"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01IX6B4BJDSB36dX29nmmNsgoB3E9U29btN",
+                    "name": "HTTP Request",
+                    "title": "Post Alert Message to WebEx Teams",
+                    "type": "web-service.http_request",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "allow_auto_redirect": true,
+                      "body": "{\n\"roomId\": \"Add Room ID here\",\n\"text\": \"SecureX Cloud Analytics has detected an alert $activity.definition_activity_01IX6B0U952C63Gclr0zYrjksFTuWeUTWjE.input.source_array[@].type$ on your network. Alert ID $activity.definition_activity_01IX6B0U952C63Gclr0zYrjksFTuWeUTWjE.input.source_array[@].id$ has been generated at $activity.definition_activity_01IX6B0U952C63Gclr0zYrjksFTuWeUTWjE.input.source_array[@].time$. For additional information please go to $workflow.definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG.output.variable_workflow_01IX6AXF590HP3kuaEYNpb953U4iDum5vxv$\"\n}",
+                      "content_type": "application/json",
+                      "continue_on_error_status_code": false,
+                      "continue_on_failure": false,
+                      "custom_headers": [
+                        {
+                          "name": "Authorization",
+                          "value": ""
+                        }
+                      ],
+                      "description": "Send alert message to Webex Teams\n\"SecureX Cloud Analytics has detected an alert {alert type} on your network. Alert ID {alert id} has been generated at {alert time}. For additional information please go to {alert url}\"",
+                      "display_name": "Post Alert Message to WebEx Teams",
+                      "method": "POST",
+                      "relative_url": "/v1/messages",
+                      "runtime_user": {
+                        "override_target_runtime_user": false,
+                        "target_default": true
+                      },
+                      "skip_execution": false,
+                      "target": {
+                        "override_workflow_target": true,
+                        "target_id": "definition_target_01GRC3KACN0EQ3FKm380fx9ufbyfPdrEJR5"
+                      }
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01GRC3KACN0EQ3FKm380fx9ufbyfPdrEJR5": {
+      "unique_name": "definition_target_01GRC3KACN0EQ3FKm380fx9ufbyfPdrEJR5",
+      "name": "Webex Teams",
+      "title": "Webex Teams",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "description": "Webex Teams",
+        "disable_certificate_validation": false,
+        "display_name": "Webex Teams",
+        "host": "webexapis.com",
+        "no_runtime_user": true,
+        "port": 443,
+        "protocol": "https"
+      }
+    },
+    "definition_target_01I5VXXRSRI1Q3Lyj4M0TUDJUUVWGlwvc75": {
+      "unique_name": "definition_target_01I5VXXRSRI1Q3Lyj4M0TUDJUUVWGlwvc75",
+      "name": "SWC_dCloud",
+      "title": "SWC_dCloud",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "disable_certificate_validation": false,
+        "display_name": "SWC_dCloud",
+        "host": "cisco-demo.obsrvbl.com",
+        "ignore_proxy": false,
+        "no_runtime_user": true,
+        "path": "/api/v3",
+        "protocol": "https"
+      }
+    }
+  },
+  "table_types": {
+    "tabletype_01I890150VZGS7d1sNh4ORUaME0HkN4o0Py": {
+      "unique_name": "tabletype_01I890150VZGS7d1sNh4ORUaME0HkN4o0Py",
+      "data_type": "datatype.tabletype",
+      "display_name": "port_scan_observable_list",
+      "columns": [
+        {
+          "name": "observ_name",
+          "title": "observ_name",
+          "type": "string"
+        },
+        {
+          "name": "scanned_ip",
+          "title": "scanned_ip",
+          "type": "string"
+        },
+        {
+          "name": "scanner_ip",
+          "title": "scanner_ip",
+          "type": "string"
+        }
+      ],
+      "base_type": "datatype",
+      "object_type": "tabletype"
+    }
+  }
+}
