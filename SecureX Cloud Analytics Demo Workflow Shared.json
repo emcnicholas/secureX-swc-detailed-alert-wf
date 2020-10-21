@@ -11,6 +11,66 @@
         "properties": {
           "value": "",
           "scope": "output",
+          "name": "general_alert_url",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01IX6AXF590HP3kuaEYNpb953U4iDum5vxv",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.secure_string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "swc_api_key",
+          "type": "datatype.secure_string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01JLIYNOULPXA3BcKzh1MHNxrlCw0acj6Z9",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.secure_string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "wxt_access_token",
+          "type": "datatype.secure_string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01JLJ30OR36UM4wmP28hMfjJmebMxSlvAta",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "wxt_room_id",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01JLJ4LOCADF22LjEYXmvulCrbXOJrYgICJ",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "end_time",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01IX6AXF591SX35I3EK9A7C45mHSWmjNdYA",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
           "name": "start_time",
           "type": "datatype.string",
           "is_required": false
@@ -39,30 +99,6 @@
           "is_required": false
         },
         "unique_name": "variable_workflow_01IX6AXF58XS931ZXmCDfKnJwCRtHrcjILv",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "output",
-          "name": "general_alert_url",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01IX6AXF590HP3kuaEYNpb953U4iDum5vxv",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "output",
-          "name": "end_time",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01IX6AXF591SX35I3EK9A7C45mHSWmjNdYA",
         "object_type": "variable_workflow"
       }
     ],
@@ -189,7 +225,7 @@
           "custom_headers": [
             {
               "name": "Authorization",
-              "value": ""
+              "value": "$workflow.definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG.input.variable_workflow_01JLIYNOULPXA3BcKzh1MHNxrlCw0acj6Z9$"
             }
           ],
           "description": "Get request for all SecureX Cloud Analytics Open Alerts in the last 24 hours",
@@ -203,7 +239,7 @@
           "skip_execution": false,
           "target": {
             "override_workflow_target": true,
-            "target_id": "definition_target_01I5VXXRSRI1Q3Lyj4M0TUDJUUVWGlwvc75"
+            "target_id": "definition_target_01JLJHG0U6UZ13EuKREavGrvz7K5pHlZGdw"
           }
         },
         "object_type": "definition_activity"
@@ -308,7 +344,7 @@
                       "custom_headers": [
                         {
                           "name": "Authorization",
-                          "value": ""
+                          "value": "$workflow.definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG.input.variable_workflow_01JLIYNOULPXA3BcKzh1MHNxrlCw0acj6Z9$"
                         }
                       ],
                       "description": "Requesting Observations for Inbound Port Scanner Alert",
@@ -322,7 +358,7 @@
                       "skip_execution": false,
                       "target": {
                         "override_workflow_target": true,
-                        "target_id": "definition_target_01I5VXXRSRI1Q3Lyj4M0TUDJUUVWGlwvc75"
+                        "target_id": "definition_target_01JLJHG0U6UZ13EuKREavGrvz7K5pHlZGdw"
                       }
                     },
                     "object_type": "definition_activity"
@@ -475,14 +511,14 @@
                         "properties": {
                           "action_timeout": 180,
                           "allow_auto_redirect": true,
-                          "body": "{\n  \"roomId\": \"Add Room ID here\",\n  \"text\": \"SecureX Cloud Analytics has detected an $activity.definition_activity_01IX6B2LYF7SX7lhlJ5feEypQwrMPTMDicQ.input.source_array[@].observation_name$ alarm on your network where internal host(s) $activity.definition_activity_01IX6B2LYF7SX7lhlJ5feEypQwrMPTMDicQ.input.source_array[@].scanned_ip$ was scanned by external host(s) $activity.definition_activity_01IX6B2LYF7SX7lhlJ5feEypQwrMPTMDicQ.input.source_array[@].scanner_ip$ at $activity.definition_activity_01IX6B0U952C63Gclr0zYrjksFTuWeUTWjE.input.source_array[@].time$. Alert ID $activity.definition_activity_01IX6B0U952C63Gclr0zYrjksFTuWeUTWjE.input.source_array[@].id$ - $activity.definition_activity_01IX6B0U952C63Gclr0zYrjksFTuWeUTWjE.input.source_array[@].type$ has been generated. For additional information please go to $workflow.definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG.output.variable_workflow_01IX6AXF58XS931ZXmCDfKnJwCRtHrcjILv$\"\n}",
+                          "body": "{\n  \"roomId\": \"$workflow.definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG.input.variable_workflow_01JLJ4LOCADF22LjEYXmvulCrbXOJrYgICJ$\",\n  \"text\": \"SecureX Cloud Analytics has detected an $activity.definition_activity_01IX6B2LYF7SX7lhlJ5feEypQwrMPTMDicQ.input.source_array[@].observation_name$ alarm on your network where internal host(s) $activity.definition_activity_01IX6B2LYF7SX7lhlJ5feEypQwrMPTMDicQ.input.source_array[@].scanned_ip$ was scanned by external host(s) $activity.definition_activity_01IX6B2LYF7SX7lhlJ5feEypQwrMPTMDicQ.input.source_array[@].scanner_ip$ at $activity.definition_activity_01IX6B0U952C63Gclr0zYrjksFTuWeUTWjE.input.source_array[@].time$. Alert ID $activity.definition_activity_01IX6B0U952C63Gclr0zYrjksFTuWeUTWjE.input.source_array[@].id$ - $activity.definition_activity_01IX6B0U952C63Gclr0zYrjksFTuWeUTWjE.input.source_array[@].type$ has been generated. For additional information please go to $workflow.definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG.output.variable_workflow_01IX6AXF58XS931ZXmCDfKnJwCRtHrcjILv$\"\n}",
                           "content_type": "application/json",
                           "continue_on_error_status_code": false,
                           "continue_on_failure": false,
                           "custom_headers": [
                             {
                               "name": "Authorization",
-                              "value": ""
+                              "value": "$workflow.definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG.input.variable_workflow_01JLJ30OR36UM4wmP28hMfjJmebMxSlvAta$"
                             }
                           ],
                           "description": "Send alert message to Webex Teams.\n\"SecureX Cloud Analytics has detected alert {alert type} on your network. Alert ID {alert id} has been generated. For additional information please go to {alert url}”.",
@@ -573,14 +609,14 @@
                     "properties": {
                       "action_timeout": 180,
                       "allow_auto_redirect": true,
-                      "body": "{\n\"roomId\": \"Add Room ID here\",\n\"text\": \"SecureX Cloud Analytics has detected an alert $activity.definition_activity_01IX6B0U952C63Gclr0zYrjksFTuWeUTWjE.input.source_array[@].type$ on your network. Alert ID $activity.definition_activity_01IX6B0U952C63Gclr0zYrjksFTuWeUTWjE.input.source_array[@].id$ has been generated at $activity.definition_activity_01IX6B0U952C63Gclr0zYrjksFTuWeUTWjE.input.source_array[@].time$. For additional information please go to $workflow.definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG.output.variable_workflow_01IX6AXF590HP3kuaEYNpb953U4iDum5vxv$\"\n}",
+                      "body": "{\n\"roomId\": \"$workflow.definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG.input.variable_workflow_01JLJ4LOCADF22LjEYXmvulCrbXOJrYgICJ$\",\n\"text\": \"SecureX Cloud Analytics has detected an alert $activity.definition_activity_01IX6B0U952C63Gclr0zYrjksFTuWeUTWjE.input.source_array[@].type$ on your network. Alert ID $activity.definition_activity_01IX6B0U952C63Gclr0zYrjksFTuWeUTWjE.input.source_array[@].id$ has been generated at $activity.definition_activity_01IX6B0U952C63Gclr0zYrjksFTuWeUTWjE.input.source_array[@].time$. For additional information please go to $workflow.definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG.output.variable_workflow_01IX6AXF590HP3kuaEYNpb953U4iDum5vxv$\"\n}",
                       "content_type": "application/json",
                       "continue_on_error_status_code": false,
                       "continue_on_failure": false,
                       "custom_headers": [
                         {
                           "name": "Authorization",
-                          "value": ""
+                          "value": "$workflow.definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG.input.variable_workflow_01JLJ30OR36UM4wmP28hMfjJmebMxSlvAta$"
                         }
                       ],
                       "description": "Send alert message to Webex Teams\n\"SecureX Cloud Analytics has detected an alert {alert type} on your network. Alert ID {alert id} has been generated at {alert time}. For additional information please go to {alert url}\"",
@@ -610,6 +646,42 @@
       "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
     ]
   },
+  "triggers": {
+    "triggerschedule_01JLJMPIC08IM6bxSyKH1oo9Fqe5QjZP3Pm": {
+      "workflow_id": "definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG",
+      "name": "5 Minute Trigger",
+      "title": "",
+      "lowercase_name": "schedule.5_minute_trigger",
+      "type": "schedule",
+      "base_type": "trigger",
+      "ref_id": "schedule_01IWC4BG8HN0K1uOiu0oazWF6uBO8tkjxLF",
+      "version": "1.0.0",
+      "disabled": true,
+      "unique_name": "triggerschedule_01JLJMPIC08IM6bxSyKH1oo9Fqe5QjZP3Pm",
+      "object_type": "triggerschedule"
+    }
+  },
+  "schedules": {
+    "schedule_01IWC4BG8HN0K1uOiu0oazWF6uBO8tkjxLF": {
+      "unique_name": "schedule_01IWC4BG8HN0K1uOiu0oazWF6uBO8tkjxLF",
+      "name": "SWC Alerts - 5 Minutes",
+      "description": "Query Stealthwatch Cloud Alert every 5 minutes",
+      "type": "basic.schedule",
+      "base_type": "schedule",
+      "properties": {
+        "calendar": "calendar_recurring_1BMfMWvgiDhSjBQ7hTSyvz3NyVZ",
+        "timezone": "Etc/GMT+0",
+        "starttime": "00:05",
+        "interval_hours": 0,
+        "interval_minutes": 5,
+        "number_of_times": 287,
+        "display_name": "SWC Alerts - 5 Minutes",
+        "description": "Query Stealthwatch Cloud Alert every 5 minutes"
+      },
+      "version": "1.0.0",
+      "object_type": "schedule"
+    }
+  },
   "targets": {
     "definition_target_01GRC3KACN0EQ3FKm380fx9ufbyfPdrEJR5": {
       "unique_name": "definition_target_01GRC3KACN0EQ3FKm380fx9ufbyfPdrEJR5",
@@ -628,20 +700,19 @@
         "protocol": "https"
       }
     },
-    "definition_target_01I5VXXRSRI1Q3Lyj4M0TUDJUUVWGlwvc75": {
-      "unique_name": "definition_target_01I5VXXRSRI1Q3Lyj4M0TUDJUUVWGlwvc75",
-      "name": "SWC_dCloud",
-      "title": "SWC_dCloud",
+    "definition_target_01JLJHG0U6UZ13EuKREavGrvz7K5pHlZGdw": {
+      "unique_name": "definition_target_01JLJHG0U6UZ13EuKREavGrvz7K5pHlZGdw",
+      "name": "SWC_Target",
+      "title": "SWC_Target",
       "type": "web-service.endpoint",
       "base_type": "target",
       "object_type": "definition_target",
       "properties": {
         "disable_certificate_validation": false,
-        "display_name": "SWC_dCloud",
-        "host": "cisco-demo.obsrvbl.com",
+        "display_name": "SWC_Target",
+        "host": "add-endpoint-here.obsrvbl.com",
         "ignore_proxy": false,
         "no_runtime_user": true,
-        "path": "/api/v3",
         "protocol": "https"
       }
     }
