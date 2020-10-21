@@ -29,6 +29,10 @@ Please follow the below steps exactly to get started!
 4. Click on **IMPORT**.
 
 5. Next we will need to fill some API keys and details before we can run this workflow. 
+    * **SWC_Target** On the main page of Orchestration, go to **Targets**, select **SWC_Target**, and change the host to your endpoint.
+    * **swc_api_key** In the SecureX Cloud Analytics Demo Workflow Shared workflow properties, scroll down to **Variables**, select the **swc_api_key** variable, and enter your API key in the Value field and save.
+    * **wxt_access_token** Select the **wxt_access_token** variable, and enter your token in the Value field and save.
+    * **wxt_room_id** Select the **wxt_room_id** variable, and enter your Webex Teams room id in the Value field and save.
 
 **MISSING DETAILS ON HOW TO INSTALL API KEYS IN TARGET**
 
