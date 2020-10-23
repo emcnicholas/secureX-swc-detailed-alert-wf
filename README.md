@@ -22,7 +22,7 @@ Please follow the below steps exactly to get started!
 
 ![](screenshots/import-workflow.png)
 
-3. Click on **Browse** and copy paste the content of the [SecureX Cloud Analytics Demo Workflow Shared.json](https://raw.githubusercontent.com/emcnicholas/secureX-swc-detailed-alert-wf/main/SecureX%20Cloud%20Analytics%20Demo%20Workflow%20Shared.json) file inside of the text window. 
+3. Click on **Browse** and copy paste the content of the [secureX-swc-detailed-alert-wf.json](https://raw.githubusercontent.com/emcnicholas/secureX-swc-detailed-alert-wf/main/SecureX%20Cloud%20Analytics%20Demo%20Workflow%20Shared.json) file inside of the text window. 
 
 ![](screenshots/copy-paste.png)
 
