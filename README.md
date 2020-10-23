@@ -30,13 +30,11 @@ Please follow the below steps exactly to get started!
 
 5. Next we will need to fill some API keys and details before we can run this workflow. 
     * **SWC_Target** On the main page of Orchestration, go to **Targets**, select **SWC_Target**, and change the host to your endpoint.
-    * **swc_api_key** In the SecureX Cloud Analytics Demo Workflow Shared workflow properties, scroll down to **Variables**, select the **swc_api_key** variable, and enter your API key in the Value field and save.
+    * **swc_api_key** In the **SecureX Cloud Analytics Demo** workflow global workflow properties, scroll down to **Variables**, select the **swc_api_key** variable, and enter your API key in the Value field and save.
     * **wxt_access_token** Select the **wxt_access_token** variable, and enter your token in the Value field and save.
     * **wxt_room_id** Select the **wxt_room_id** variable, and enter your Webex Teams room id in the Value field and save.
 
-**MISSING DETAILS ON HOW TO INSTALL API KEYS IN TARGET**
-
-> **Note:** To obtain the SecureX threat response API keys, create one here: https://securex.us.security.cisco.com/settings/apiClients. Please change the _.us._ in the url to _.eu._ or _.apjc._ respectively for the European or Asian instances. It might be that you have these already created, just make sure it has at least the `Casebook` scope checked. If you are using the EU or APJC instance, you will also need to change the target of the `CTRGenerateAccessToken` and `CTR Create Casebook` activities in the workflow. You do this by clicking on the activity and scrolling to the `target` section. **Make sure to do this for all 4 related CTR targets!** Here is an example:
+> **Note:** make sure not to select an activity when looking for the global workflow properties.
 
 > **Note:** Please retrieve your Webex key from: [https://developer.webex.com/docs/api/getting-started](https://developer.webex.com/docs/api/getting-started). Please be aware that the personal token from the getting started page only works for 12 hours. Please follow these steps to request a "bot" token: https://developer.webex.com/docs/integrations.
 
