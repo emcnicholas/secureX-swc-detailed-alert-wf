@@ -30,7 +30,7 @@ Please follow the below steps exactly to get started!
 
 5. Next we will need to fill some API keys and details before we can run this workflow. 
 
-6. First let's update **SWC_Target**. On the main page of Orchestration, go to **Targets**, select **SWC_Target**, and change the host to your SWC base url. Please retrieve you base URL by looking at the URL of your SWC portal. For example if your URL was https://acme.obsrvbl.com/v2/#/settings/site/api-credentials, then you would need acme.obsrvbl.com/api/v3/ as your base URL target (**SWC_Target**).
+6. First let's update **SWC_Target**. On the main page of Orchestration, go to **Targets**, select **SWC_Target**, and change the host to your SWC base url. Please retrieve you base URL by looking at the URL of your SWC portal. For example if your URL was https://acme.obsrvbl.com/v2/#/settings/site/api-credentials, then you would need **acme.obsrvbl.com/api/v3/** as your base URL target (**SWC_Target**).
 
 ![](screenshots/targets_swc.png)
 
