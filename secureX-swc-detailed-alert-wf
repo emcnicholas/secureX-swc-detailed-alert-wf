@@ -1,8 +1,8 @@
 {
   "workflow": {
     "unique_name": "definition_workflow_01IX6AXFHWOA22G14XaXgyUJKMLOjKzDMfG",
-    "name": "SecureX Cloud Analytics Demo Workflow Shared",
-    "title": "SecureX Cloud Analytics Demo Workflow Shared",
+    "name": "Stealthwatch Cloud - Detailed Alerts to Webex Teams",
+    "title": "Stealthwatch Cloud - Detailed Alerts to Webex Teams",
     "type": "generic.workflow",
     "base_type": "workflow",
     "variables": [
@@ -108,7 +108,7 @@
       },
       "delete_workflow_instance": false,
       "description": "The workflow will query Stealthwatch Cloud for all open alerts within the last 24 hours. We will then parse out the \"Inbound Port Scanner\" alert and create a custom alert message to send to Webex Teams. We also create a generic message to send for all other alerts.",
-      "display_name": "SecureX Cloud Analytics Demo Workflow Shared",
+      "display_name": "Stealthwatch Cloud - Detailed Alerts to Webex Teams",
       "runtime_user": {
         "override_target_runtime_user": false,
         "specify_on_workflow_start": false,
