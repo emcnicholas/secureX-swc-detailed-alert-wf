@@ -12,7 +12,7 @@ This Cisco SecureX orchestration workflow is very similar to my ["Stealthwatch C
 ## Installation Steps
 Please follow the below steps exactly to get started!
 
-1. Browse to your SecureX orchestration instance. This wille be a different URL depending on the region your account is in: 
+1. Browse to your SecureX orchestration instance. This will be a different URL depending on the region your account is in: 
 
 * US: https://securex-ao.us.security.cisco.com/orch-ui/workflows/
 * EU: https://securex-ao.eu.security.cisco.com/orch-ui/workflows/
