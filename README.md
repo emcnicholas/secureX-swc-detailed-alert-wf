@@ -49,11 +49,11 @@ Please follow the below steps exactly to get started!
 
 ![](screenshots/run.png)
 
-11. If successfull, you should receive a Webex Team Message in the space you configured above similar to the following
+11. If successful, you should receive a Webex Team Message in the space you configured above similar to the following
 
 ![](screenshots/wxt_message.png)
 
-12. As a final step you could choose to enable to scheduled trigger for this workflow. This is recommended, as the workflow only retrieves the security events of the last hour. By scheduling it, the Security analysts will be updated every hour for potential new malicious activity. To enable the trigger, click on the hyperlink below and uncheck the `DISABLE TRIGGER` checkbox. This can be found in the workflow properties in the right menu pane. 
+12. As a final step you could choose to enable to scheduled trigger for this workflow. This is recommended, as the workflow only retrieves the security events of the last 5 minutes. By scheduling it, the Security analysts will be updated every 5 minutes for potential new malicious activity. To enable the trigger, click on the hyperlink below and uncheck the `DISABLE TRIGGER` checkbox. This can be found in the workflow properties in the right menu pane. 
 
 ![](screenshots/schedule.png)
 
