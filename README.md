@@ -7,7 +7,8 @@ This Cisco SecureX orchestration workflow is very similar to my ["Stealthwatch C
 **Prerequisites:**
 1. Cisco Stealthwatch Cloud (SWC) Account (and API key)
 2. Cisco SecureX Account (and API key)
-3. Cisco Webex Teams Account (and API key)
+3. Cisco SecureX Orchestration Module enabled and integrated
+4. Cisco Webex Teams Account (and API key)
 
 ## Installation Steps
 Please follow the below steps exactly to get started!
